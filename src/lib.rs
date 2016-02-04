@@ -1,6 +1,4 @@
-#[cfg(test)]
-mod test {
-    #[test]
-    fn it_works() {
-    }
-}
+
+extern crate trivert_math;
+
+pub use trivert_math as math;

@@ -1,6 +1,10 @@
 [package]
 name        = "trivert"
-version     = "0.0.1"
+version     = "0.1.0"
 authors     = ["Kyle Finlay <kyle.finlay01@gmail.com>"]
 description = "A powerful game framework written in Rust"
 license     = "BSD-3-Clause"
+
+[dependencies.trivert_math]
+path    = "src/trivert_math"
+version = "0.1.0"

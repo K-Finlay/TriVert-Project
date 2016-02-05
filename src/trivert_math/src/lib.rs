@@ -25,7 +25,6 @@
 #![allow   (dead_code)]
 #![deny    (missing_docs)]
 #![feature (augmented_assignments)]
-#![feature (op_assign_traits)]
 
 // Static variables
 /// The value of PI.
@@ -35,6 +34,10 @@ pub static HALF_PI  : f32 = 1.570796;
 
 // Private modules
 mod mathf;
+mod vec2;
 
 // Public module exports
 pub use self::mathf::Mathf;
+pub use self::vec2::Vec2;
+pub use self::vec2::Vec2f;
+pub use self::vec2::Vec2i;

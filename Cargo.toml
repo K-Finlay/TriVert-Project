@@ -8,3 +8,7 @@ license     = "BSD-3-Clause"
 [dependencies.trivert_math]
 path    = "src/trivert_math"
 version = "0.1.0"
+
+[lib]
+path        = "src/lib.rs"
+crate-type  = ["dylib"]

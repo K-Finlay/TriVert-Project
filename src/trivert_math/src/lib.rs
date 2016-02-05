@@ -25,6 +25,7 @@
 #![allow   (dead_code)]
 #![deny    (missing_docs)]
 #![feature (augmented_assignments)]
+#![feature (op_assign_traits)]
 
 // Static variables
 /// The value of PI.

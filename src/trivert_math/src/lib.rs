@@ -38,6 +38,4 @@ mod vec2;
 
 // Public module exports
 pub use self::mathf::Mathf;
-pub use self::vec2::Vec2;
 pub use self::vec2::Vec2f;
-pub use self::vec2::Vec2i;

@@ -23,22 +23,15 @@ use std::cmp::PartialEq;
 /*------STRUCTS-----------------------------------------------------------------------------------*/
 /*================================================================================================*/
 
-/// The generic Vec2 struct
+/// The Vec2f struct
 ///
-/// It is used mainly for 2D releated mathematics (e.g. texture and UV coordinates)
-pub struct Vec2 <T> {
+/// It is used mainly for 2D releated mathematics (e.g. texture and UV coordinates).
+/// 32-bit floats are used for the values.
+pub struct Vec2f {
 
-    x : T,
-    y : T
+    x : f32,
+    y : f32
 }
-
-/*================================================================================================*/
-
-/// The f32 Vec2 struct
-pub type Vec2f = Vec2 <f32>;
-
-/// The i32 Vec2 struct
-pub type Vec2i = Vec2 <i32>;
 
 /*============================================================================================================*/
 /*------PUBLIC FUNCTIONS--------------------------------------------------------------------------------------*/

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 /*================================================================================================*/
+
 /*================================================================================================*/
 //! This crate contains all mathematical functionality for use in TriVert.
 //!
@@ -25,3 +26,15 @@
 #![deny    (missing_docs)]
 #![feature (augmented_assignments)]
 #![feature (op_assign_traits)]
+
+// Static variables
+/// The value of PI.
+pub static PI       : f32 = 3.141592;
+/// Half of PI.
+pub static HALF_PI  : f32 = 1.570796;
+
+// Private modules
+mod mathf;
+
+// Public module exports
+pub use self::mathf::Mathf;

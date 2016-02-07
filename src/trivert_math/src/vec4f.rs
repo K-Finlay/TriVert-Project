@@ -51,11 +51,11 @@ impl Vec4f {
     ///
     /// # Examples
     /// ```
-    /// let vec = Vec4f {x : 10.0, y : 5.0};
+    /// let vec = Vec4f {x : 10.0, y : 5.0, z : 1.0, w : 0.0};
     /// println! ("Vector = {}", vec.to_string ());
     /// ```
     /// ```c
-    /// Output : Vector = 10.0, 5.0
+    /// Output : Vector = 10.0, 5.0, 1.0, 0.0
     pub fn to_string (&self) -> String {
 
         format! ("{}, {}, {}, {}", self.x, self.y, self.z, self.w)

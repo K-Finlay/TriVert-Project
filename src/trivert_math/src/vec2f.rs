@@ -30,8 +30,11 @@ use std::cmp::PartialEq;
 #[derive (Copy, Clone)]
 pub struct Vec2f {
 
-    x : f32,
-    y : f32
+    // Public
+    /// X-axis coordinate
+    pub x : f32,
+    /// Y-axis coordinate
+    pub y : f32
 }
 
 /*================================================================================================*/

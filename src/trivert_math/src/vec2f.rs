@@ -27,6 +27,7 @@ use std::cmp::PartialEq;
 ///
 /// It is used mainly for 2D releated mathematics (e.g. texture and UV coordinates).
 /// 32-bit floats are used for the values.
+#[derive (Copy, Clone)]
 pub struct Vec2f {
 
     x : f32,
@@ -66,6 +67,66 @@ impl Vec2f {
 
         Vec2f {x : 0.0,
                y : 0.0}
+    }
+
+/*================================================================================================*/
+
+    /// Returns the dot product of two vectors.
+    pub fn dot (lhs : &Vec2f, rhs : &Vec2f) -> f32 {
+
+        (lhs.x * rhs.x) +
+        (lhs.y * rhs.y)
+    }
+
+/*================================================================================================*/
+
+    /// Returns the distance between two vectors
+    pub fn distance (start : &Vec2f, end : &Vec2f) -> f32 {
+
+        Vec2f::length (& (*start - *end))
+    }
+
+/*================================================================================================*/
+
+    /// Returns the length of a vector
+    pub fn length (vector : &Vec2f) -> f32 {
+
+        (vector.x * vector.x +
+         vector.y * vector.y).sqrt ()
+    }
+
+/*================================================================================================*/
+
+    /// Linearly interpolates between two vectors.
+    pub fn lerp (start : &Vec2f, end : &Vec2f, percentage : f32) -> Vec2f {
+
+        Vec2f {x : Mathf::lerp (start.x, end.x, percentage),
+               y : Mathf::lerp (start.y, end.y, percentage)}
+    }
+
+/*================================================================================================*/
+
+    /// Linearly interpolates between two vectors without clamping
+    pub fn lerp_unclamped (start : &Vec2f, end : &Vec2f, percentage : f32) -> Vec2f {
+
+        Vec2f {x : Mathf::lerp_unclamped (start.x, end.x, percentage),
+               y : Mathf::lerp_unclamped (start.y, end.y, percentage)}
+    }
+
+/*================================================================================================*/
+
+    /// Get a normalized vector.
+    pub fn normalize (vector : &Vec2f) -> Vec2f {
+
+        let length = Vec2f::length (vector);
+
+        if length != 0.0 {
+
+            return Vec2f {x : vector.x / length,
+                          y : vector.y / length}
+        }
+
+        Vec2f::new ()
     }
 }
 

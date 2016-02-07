@@ -26,7 +26,7 @@ use std::cmp::PartialEq;
 /// The Vec3f struct
 ///
 /// This is the most used out of the three vector structs.
-/// It is used to representing positions in 3D space (vertices, normals, positions, etc).
+/// It is used for representing positions in 3D space (vertices, normals, positions, etc).
 /// 32-bit floats are used for the values.
 #[derive (Copy, Clone)]
 pub struct Vec3f {

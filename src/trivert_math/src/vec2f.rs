@@ -122,3 +122,228 @@ impl AddAssign <f32> for Vec2f {
         self.y += rhs;
     }
 }
+
+/*================================================================================================*/
+
+impl Sub for Vec2f {
+
+    type Output = Vec2f;
+
+    // Subtraction operator (vector)
+    fn sub (self, rhs : Vec2f) -> Vec2f {
+
+        Vec2f {x : self.x - rhs.x,
+               y : self.y - rhs.y}
+    }
+}
+
+/*================================================================================================*/
+
+impl Sub <f32> for Vec2f {
+
+    type Output = Vec2f;
+
+    // Subtraction operator (f32)
+    fn sub (self, rhs : f32) -> Vec2f {
+
+        Vec2f {x : self.x - rhs,
+               y : self.y - rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl SubAssign for Vec2f {
+
+    // Subtraction assignment operator (vector)
+    fn sub_assign (&mut self, rhs : Vec2f) {
+
+        self.x -= rhs.x;
+        self.y -= rhs.y;
+    }
+}
+
+/*================================================================================================*/
+
+impl SubAssign <f32> for Vec2f {
+
+    // Subtraction assignment operator (f32)
+    fn sub_assign (&mut self, rhs : f32) {
+
+        self.x += rhs;
+        self.y += rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl Neg for Vec2f {
+
+    type Output = Vec2f;
+
+    // Unary minus operator
+    fn neg (self) -> Vec2f {
+
+        Vec2f {x : -self.x,
+               y : -self.y}
+    }
+}
+
+/*================================================================================================*/
+
+impl Mul for Vec2f {
+
+    type Output = Vec2f;
+
+    // Multiplication operator (vector)
+    fn mul (self, rhs : Vec2f) -> Vec2f {
+
+        Vec2f {x : self.x * rhs.x,
+               y : self.y * rhs.y}
+    }
+}
+
+/*================================================================================================*/
+
+impl Mul <f32> for Vec2f {
+
+    type Output = Vec2f;
+
+    // Multiplication operator (f32)
+    fn mul (self, rhs : f32) -> Vec2f {
+
+        Vec2f {x : self.x * rhs,
+               y : self.y * rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl MulAssign for Vec2f {
+
+    // Multiplication assignment operator (vector)
+    fn mul_assign (&mut self, rhs : Vec2f) {
+
+        self.x *= rhs.x;
+        self.y *= rhs.y;
+    }
+}
+
+/*================================================================================================*/
+
+impl MulAssign <f32> for Vec2f {
+
+    // Multiplication assignment operator (f32)
+    fn mul_assign (&mut self, rhs : f32) {
+
+        self.x *= rhs;
+        self.y *= rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl Div for Vec2f {
+
+    type Output = Vec2f;
+
+    // Division operator (vector)
+    fn div (self, rhs : Vec2f) -> Vec2f {
+
+        Vec2f {x : self.x / rhs.x,
+               y : self.y / rhs.y}
+    }
+}
+
+/*================================================================================================*/
+
+impl Div <f32> for Vec2f {
+
+    type Output = Vec2f;
+
+    // Division operator (f32)
+    fn div (self, rhs : f32) -> Vec2f {
+
+        Vec2f {x : self.x / rhs,
+               y : self.y / rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl DivAssign for Vec2f {
+
+    // Division assignment operator (vector)
+    fn div_assign (&mut self, rhs : Vec2f) {
+
+        self.x /= rhs.x;
+        self.y /= rhs.y;
+    }
+}
+
+/*================================================================================================*/
+
+impl DivAssign <f32> for Vec2f {
+
+    // Division assignment operator (f32)
+    fn div_assign (&mut self, rhs : f32) {
+
+        self.x /= rhs;
+        self.y /= rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl PartialEq for Vec2f {
+
+    // Equal to operator
+    fn eq (&self, rhs : &Vec2f) -> bool {
+
+        self.x == rhs.x &&
+        self.y == rhs.y
+    }
+
+/*================================================================================================*/
+
+    // Not equal to operator
+    fn ne (&self, rhs : &Vec2f) -> bool {
+
+        self.x != rhs.x ||
+        self.y != rhs.y
+    }
+}
+
+/*================================================================================================*/
+
+impl Index <u8> for Vec2f {
+
+    type Output = f32;
+
+    // Index operator (immutable)
+    fn index (&self, index : u8) -> &f32 {
+
+        match index {
+
+            0 => &self.x,
+            1 => &self.y,
+            _ => unreachable! ("Index out of range for Vec2f")
+        }
+    }
+}
+
+/*================================================================================================*/
+
+impl IndexMut <u8> for Vec2f {
+
+    // Index operator (mutable)
+    fn index_mut (&mut self, index : u8) -> &mut f32 {
+
+        match index {
+
+            0 => &mut self.x,
+            1 => &mut self.y,
+            _ => unreachable! ("Index out of range for Vec2f")
+        }
+    }
+}

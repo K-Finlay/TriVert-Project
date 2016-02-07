@@ -234,8 +234,8 @@ impl SubAssign <f32> for Vec2f {
     // Subtraction assignment operator (f32)
     fn sub_assign (&mut self, rhs : f32) {
 
-        self.x += rhs;
-        self.y += rhs;
+        self.x -= rhs;
+        self.y -= rhs;
     }
 }
 

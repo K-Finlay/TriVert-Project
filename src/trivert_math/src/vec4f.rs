@@ -1,0 +1,470 @@
+/*================================================================================================*/
+// Copyright 2016 Kyle Finlay
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+/*================================================================================================*/
+
+use Mathf;
+
+use std::ops::*;
+use std::cmp::PartialEq;
+
+/*================================================================================================*/
+/*------STRUCTS-----------------------------------------------------------------------------------*/
+/*================================================================================================*/
+
+/// The Vec4f struct
+///
+/// It is used for things such as mesh tangets, and shader parameters.
+/// 32-bit floats are used for the values.
+#[derive (Copy, Clone)]
+pub struct Vec4f {
+
+    // Public
+    /// X-axis coordinate
+    pub x : f32,
+    /// Y-axis coordinate
+    pub y : f32,
+    /// Z-axis coordinate
+    pub z : f32,
+    /// W-axis coordinate
+    pub w : f32
+}
+
+/*================================================================================================*/
+/*------PUBLIC FUNCTIONS--------------------------------------------------------------------------*/
+/*================================================================================================*/
+
+impl Vec4f {
+
+    /// Formats the vector as a string.
+    ///
+    /// # Examples
+    /// ```
+    /// let vec = Vec4f {x : 10.0, y : 5.0};
+    /// println! ("Vector = {}", vec.to_string ());
+    /// ```
+    /// ```c
+    /// Output : Vector = 10.0, 5.0
+    pub fn to_string (&self) -> String {
+
+        format! ("{}, {}, {}, {}", self.x, self.y, self.z, self.w)
+    }
+
+/*================================================================================================*/
+/*------PUBLIC STATIC FUNCTIONS-------------------------------------------------------------------*/
+/*================================================================================================*/
+
+    /// Creates a vector with a default value of zero.
+    ///
+    /// # Examples
+    /// ```
+    /// let vec = Vec4f::new ();
+    pub fn new () -> Vec4f {
+
+        Vec4f {x : 0.0,
+               y : 0.0,
+               z : 0.0,
+               w : 0.0}
+    }
+
+/*================================================================================================*/
+
+    /// Returns the dot product of two vectors.
+    pub fn dot (lhs : &Vec4f, rhs : &Vec4f) -> f32 {
+
+        (lhs.x * rhs.x) +
+        (lhs.y * rhs.y) +
+        (lhs.z * rhs.z) +
+        (lhs.w * rhs.w)
+    }
+
+/*================================================================================================*/
+
+    /// Returns the distance between two vectors
+    pub fn distance (start : &Vec4f, end : &Vec4f) -> f32 {
+
+        Vec4f::length (& (*start - *end))
+    }
+
+/*================================================================================================*/
+
+    /// Returns the length of a vector
+    pub fn length (vector : &Vec4f) -> f32 {
+
+        (vector.x * vector.x +
+         vector.y * vector.y +
+         vector.z * vector.z +
+         vector.w * vector.w).sqrt ()
+    }
+
+/*================================================================================================*/
+
+    /// Linearly interpolates between two vectors.
+    pub fn lerp (start : &Vec4f, end : &Vec4f, percentage : f32) -> Vec4f {
+
+        Vec4f {x : Mathf::lerp (start.x, end.x, percentage),
+               y : Mathf::lerp (start.y, end.y, percentage),
+               z : Mathf::lerp (start.z, end.z, percentage),
+               w : Mathf::lerp (start.w, end.w, percentage)}
+    }
+
+/*================================================================================================*/
+
+    /// Linearly interpolates between two vectors without clamping
+    pub fn lerp_unclamped (start : &Vec4f, end : &Vec4f, percentage : f32) -> Vec4f {
+
+        Vec4f {x : Mathf::lerp_unclamped (start.x, end.x, percentage),
+               y : Mathf::lerp_unclamped (start.y, end.y, percentage),
+               z : Mathf::lerp_unclamped (start.z, end.z, percentage),
+               w : Mathf::lerp_unclamped (start.w, end.w, percentage)}
+    }
+
+/*================================================================================================*/
+
+    /// Get a normalized vector.
+    pub fn normalize (vector : &Vec4f) -> Vec4f {
+
+        let length = Vec4f::length (vector);
+
+        if length != 0.0 {
+
+            return Vec4f {x : vector.x / length,
+                          y : vector.y / length,
+                          z : vector.z / length,
+                          w : vector.w / length}
+        }
+
+        Vec4f::new ()
+    }
+}
+
+/*================================================================================================*/
+/*------OPERATOR OVERLOADS------------------------------------------------------------------------*/
+/*================================================================================================*/
+
+impl Add for Vec4f {
+
+    type Output = Vec4f;
+
+    // Addition operator (vector)
+    fn add (self, rhs : Vec4f) -> Vec4f {
+
+        Vec4f {x : self.x + rhs.x,
+               y : self.y + rhs.y,
+               z : self.z + rhs.z,
+               w : self.w + rhs.w}
+    }
+}
+
+/*================================================================================================*/
+
+impl Add <f32> for Vec4f {
+
+    type Output = Vec4f;
+
+    // Addition operator (f32)
+    fn add (self, rhs : f32) -> Vec4f {
+
+        Vec4f {x : self.x + rhs,
+               y : self.y + rhs,
+               z : self.z + rhs,
+               w : self.w + rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl AddAssign for Vec4f {
+
+    // Addition assignment operator (vector)
+    fn add_assign (&mut self, rhs : Vec4f) {
+
+        self.x += rhs.x;
+        self.y += rhs.y;
+        self.z += rhs.z;
+        self.w += rhs.w;
+    }
+}
+
+/*================================================================================================*/
+
+impl AddAssign <f32> for Vec4f {
+
+    // Addition assignment operator (f32)
+    fn add_assign (&mut self, rhs : f32) {
+
+        self.x += rhs;
+        self.y += rhs;
+        self.z += rhs;
+        self.w += rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl Sub for Vec4f {
+
+    type Output = Vec4f;
+
+    // Subtraction operator (vector)
+    fn sub (self, rhs : Vec4f) -> Vec4f {
+
+        Vec4f {x : self.x - rhs.x,
+               y : self.y - rhs.y,
+               z : self.z - rhs.z,
+               w : self.w - rhs.w}
+    }
+}
+
+/*================================================================================================*/
+
+impl Sub <f32> for Vec4f {
+
+    type Output = Vec4f;
+
+    // Subtraction operator (f32)
+    fn sub (self, rhs : f32) -> Vec4f {
+
+        Vec4f {x : self.x - rhs,
+               y : self.y - rhs,
+               z : self.z - rhs,
+               w : self.w - rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl SubAssign for Vec4f {
+
+    // Subtraction assignment operator (vector)
+    fn sub_assign (&mut self, rhs : Vec4f) {
+
+        self.x -= rhs.x;
+        self.y -= rhs.y;
+        self.z -= rhs.z;
+        self.w -= rhs.w;
+    }
+}
+
+/*================================================================================================*/
+
+impl SubAssign <f32> for Vec4f {
+
+    // Subtraction assignment operator (f32)
+    fn sub_assign (&mut self, rhs : f32) {
+
+        self.x -= rhs;
+        self.y -= rhs;
+        self.z -= rhs;
+        self.w -= rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl Neg for Vec4f {
+
+    type Output = Vec4f;
+
+    // Unary minus operator
+    fn neg (self) -> Vec4f {
+
+        Vec4f {x : -self.x,
+               y : -self.y,
+               z : -self.z,
+               w : -self.w}
+    }
+}
+
+/*================================================================================================*/
+
+impl Mul for Vec4f {
+
+    type Output = Vec4f;
+
+    // Multiplication operator (vector)
+    fn mul (self, rhs : Vec4f) -> Vec4f {
+
+        Vec4f {x : self.x * rhs.x,
+               y : self.y * rhs.y,
+               z : self.z * rhs.z,
+               w : self.w * rhs.w}
+    }
+}
+
+/*================================================================================================*/
+
+impl Mul <f32> for Vec4f {
+
+    type Output = Vec4f;
+
+    // Multiplication operator (f32)
+    fn mul (self, rhs : f32) -> Vec4f {
+
+        Vec4f {x : self.x * rhs,
+               y : self.y * rhs,
+               z : self.z * rhs,
+               w : self.w * rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl MulAssign for Vec4f {
+
+    // Multiplication assignment operator (vector)
+    fn mul_assign (&mut self, rhs : Vec4f) {
+
+        self.x *= rhs.x;
+        self.y *= rhs.y;
+        self.z *= rhs.z;
+        self.w *= rhs.w;
+    }
+}
+
+/*================================================================================================*/
+
+impl MulAssign <f32> for Vec4f {
+
+    // Multiplication assignment operator (f32)
+    fn mul_assign (&mut self, rhs : f32) {
+
+        self.x *= rhs;
+        self.y *= rhs;
+        self.z *= rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl Div for Vec4f {
+
+    type Output = Vec4f;
+
+    // Division operator (vector)
+    fn div (self, rhs : Vec4f) -> Vec4f {
+
+        Vec4f {x : self.x / rhs.x,
+               y : self.y / rhs.y,
+               z : self.z / rhs.z,
+               w : self.w / rhs.w}
+    }
+}
+
+/*================================================================================================*/
+
+impl Div <f32> for Vec4f {
+
+    type Output = Vec4f;
+
+    // Division operator (f32)
+    fn div (self, rhs : f32) -> Vec4f {
+
+        Vec4f {x : self.x / rhs,
+               y : self.y / rhs,
+               z : self.z / rhs,
+               w : self.w / rhs}
+    }
+}
+
+/*================================================================================================*/
+
+impl DivAssign for Vec4f {
+
+    // Division assignment operator (vector)
+    fn div_assign (&mut self, rhs : Vec4f) {
+
+        self.x /= rhs.x;
+        self.y /= rhs.y;
+        self.z /= rhs.z;
+        self.w /= rhs.w;
+    }
+}
+
+/*================================================================================================*/
+
+impl DivAssign <f32> for Vec4f {
+
+    // Division assignment operator (f32)
+    fn div_assign (&mut self, rhs : f32) {
+
+        self.x /= rhs;
+        self.y /= rhs;
+        self.z /= rhs;
+        self.w /= rhs;
+    }
+}
+
+/*================================================================================================*/
+
+impl PartialEq for Vec4f {
+
+    // Equal to operator
+    fn eq (&self, rhs : &Vec4f) -> bool {
+
+        self.x == rhs.x &&
+        self.y == rhs.y &&
+        self.z == rhs.z &&
+        self.w == rhs.w
+    }
+
+/*================================================================================================*/
+
+    // Not equal to operator
+    fn ne (&self, rhs : &Vec4f) -> bool {
+
+        self.x != rhs.x ||
+        self.y != rhs.y ||
+        self.z != rhs.z ||
+        self.w != rhs.w
+    }
+}
+
+/*================================================================================================*/
+
+impl Index <u8> for Vec4f {
+
+    type Output = f32;
+
+    // Index operator (immutable)
+    fn index (&self, index : u8) -> &f32 {
+
+        match index {
+
+            0 => &self.x,
+            1 => &self.y,
+            2 => &self.z,
+            3 => &self.w,
+            _ => unreachable! ("Index out of range for Vec4f")
+        }
+    }
+}
+
+/*================================================================================================*/
+
+impl IndexMut <u8> for Vec4f {
+
+    // Index operator (mutable)
+    fn index_mut (&mut self, index : u8) -> &mut f32 {
+
+        match index {
+
+            0 => &mut self.x,
+            1 => &mut self.y,
+            2 => &mut self.z,
+            3 => &mut self.w,
+            _ => unreachable! ("Index out of range for Vec4f")
+        }
+    }
+}

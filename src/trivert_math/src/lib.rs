@@ -36,7 +36,9 @@ pub static HALF_PI  : f32 = 1.570796;
 // Private modules
 mod mathf;
 mod vec2f;
+mod vec3f;
 
 // Public module exports
 pub use self::mathf::Mathf;
 pub use self::vec2f::Vec2f;
+pub use self::vec3f::Vec3f;

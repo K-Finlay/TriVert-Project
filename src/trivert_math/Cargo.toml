@@ -3,7 +3,7 @@ name        = "trivert_math"
 version     = "0.1.0"
 authors     = ["Kyle Finlay <kyle.finlay01@gmail.com>"]
 description = "Math library for TriVert"
-license     = "BSD-3-Clause"
+license     = "Apache-2.0"
 
 [lib]
 name = "trivert_math"

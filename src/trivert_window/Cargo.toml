@@ -1,0 +1,10 @@
+[package]
+name        = "trivert_window"
+version     = "0.1.0"
+authors     = ["Kyle Finlay <kyle.finlay01@gmail.com>"]
+description = "Window library for TriVert"
+license     = "Apache-2.0"
+
+[lib]
+name = "trivert_window"
+path = "src/lib.rs"

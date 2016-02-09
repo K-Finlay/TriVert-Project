@@ -31,14 +31,26 @@ use self::trivert_math as math;
 pub trait WindowInterface {
 
     // Getters
-    /// Get the current position of the window
+    /// Gets the current position of the window
     fn get_position (&self) -> math::Vec2f;
-    /// Get the current size of the window
+    /// Getterss the current size of the window
     fn get_size (&self) -> math::Vec2f;
+    /// Gets the window title
+    fn get_window_title (&self) -> String;
 
     // Setters
-    /// Set the position of the window
+    /// Sets the position of the window
     fn set_position (&self, math::Vec2f);
-    /// Set the size of the window
+    /// Sets the size of the window
     fn set_size (&self, math::Vec2f);
+    /// Sets the window title
+    fn set_window_title (&self, String);
+
+    // Functions
+    /// Initializes the window
+    ///
+    /// Returns an error string on failure.
+    fn initialize (&self) -> Result <(), &'static str>;
+    /// Releases the window, and all of it's resources
+    fn release (&self);
 }

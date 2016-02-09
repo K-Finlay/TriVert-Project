@@ -30,6 +30,8 @@
 
 // External crates
 extern crate trivert_math;
+extern crate trivert_window;
 
 // Public module exports
 pub use trivert_math as math;
+pub use trivert_window as window;

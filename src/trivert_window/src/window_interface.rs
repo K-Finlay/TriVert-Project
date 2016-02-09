@@ -14,19 +14,31 @@
 // limitations under the License.
 /*================================================================================================*/
 
+// External crates
+extern crate trivert_math;
+
+// Private module exports
+use self::trivert_math as math;
+
 /*================================================================================================*/
-//! This crate contains all window functionality for use in TriVert.
-//!
-//! It allows you to create a cross platform window (through the use of multiple backends),
-//! and provide a rendering surface for the renderer.
+/*------TRAITS------------------------------------------------------------------------------------*/
 /*================================================================================================*/
 
-// Crate attributes
-#![allow (dead_code)]
-#![deny  (missing_docs)]
+/// This is the window interface trait.
+///
+/// It is implemented by all window backends.
+/// This is to allow for things such as loading a backend dynamically from a shared library.
+pub trait WindowInterface {
 
-// Private modules
-mod window_interface;
+    // Getters
+    /// Get the current position of the window
+    fn get_position (&self) -> math::Vec2f;
+    /// Get the current size of the window
+    fn get_size (&self) -> math::Vec2f;
 
-// Public module exports
-pub use self::window_interface::WindowInterface;
+    // Setters
+    /// Set the position of the window
+    fn set_position (&self, math::Vec2f);
+    /// Set the size of the window
+    fn set_size (&self, math::Vec2f);
+}

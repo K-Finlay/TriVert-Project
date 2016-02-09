@@ -5,6 +5,9 @@ authors     = ["Kyle Finlay <kyle.finlay01@gmail.com>"]
 description = "Window library for TriVert"
 license     = "Apache-2.0"
 
+[dependencies]
+trivert_math  = {version = "0.1.0", path = "../trivert_math"}
+
 [lib]
 name = "trivert_window"
 path = "src/lib.rs"

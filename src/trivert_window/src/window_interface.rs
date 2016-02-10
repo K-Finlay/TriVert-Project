@@ -36,15 +36,15 @@ pub trait WindowInterface {
     /// Getterss the current size of the window
     fn get_size (&self) -> math::Vec2f;
     /// Gets the window title
-    fn get_window_title (&self) -> String;
+    fn get_title (&self) -> String;
 
     // Setters
     /// Sets the position of the window
-    fn set_position (&self, math::Vec2f);
+    fn set_position (&mut self, position : math::Vec2f);
     /// Sets the size of the window
-    fn set_size (&self, math::Vec2f);
+    fn set_size (&mut self, size : math::Vec2f);
     /// Sets the window title
-    fn set_window_title (&self, String);
+    fn set_title (&mut self, title : String);
 
     // Functions
     /// Initializes the window

@@ -14,20 +14,8 @@
 // limitations under the License.
 /*================================================================================================*/
 
-/*================================================================================================*/
-//! This crate contains all window functionality for use in TriVert.
-//!
-//! It allows you to create a cross platform window (through the use of multiple backends),
-//! and provide a rendering surface for the renderer.
-/*================================================================================================*/
-
-// Crate attributes
-#![allow (dead_code)]
-#![deny  (missing_docs)]
-
 // Private modules
-mod window_interface;
-mod _detail;
+mod window_interface_null;
 
 // Public module exports
-pub use self::window_interface::WindowInterface;
+pub use self::window_interface_null::WindowInterfaceNull;

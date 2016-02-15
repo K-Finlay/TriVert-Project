@@ -14,22 +14,17 @@
 // limitations under the License.
 /*================================================================================================*/
 
+use super::WindowInterface;
+use super::_detail::WindowInterfaceNull;
+
 /*================================================================================================*/
-//! This crate contains all window functionality for use in TriVert.
-//!
-//! It allows you to create a cross platform window (through the use of multiple backends),
-//! and provide a rendering surface for the renderer.
+/*------STRUCTS-----------------------------------------------------------------------------------*/
 /*================================================================================================*/
 
-// Crate attributes
-#![allow (dead_code)]
-#![deny  (missing_docs)]
+/// This is the main window struct
+///
+/// It is the platform agnostic wrapper for the various window interfaces.
+pub struct Window {
 
-// Private modules
-mod window;
-mod window_interface;
-mod _detail;
-
-// Public module exports
-pub use self::window::Window;
-pub use self::window_interface::WindowInterface;
+    interface : Box <WindowInterface>
+}

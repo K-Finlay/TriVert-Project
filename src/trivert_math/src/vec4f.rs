@@ -27,7 +27,7 @@ use std::cmp::PartialEq;
 ///
 /// It is used for things such as mesh tangets, and shader parameters.
 /// 32-bit floats are used for the values.
-#[derive (Copy, Clone)]
+#[derive (Copy, Clone, Default)]
 pub struct Vec4f {
 
     // Public

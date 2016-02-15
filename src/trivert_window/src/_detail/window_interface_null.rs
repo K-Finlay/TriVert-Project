@@ -31,6 +31,7 @@ use super::super::WindowInterface;
 ///
 /// It is used as a failsafe if other backends fail.
 /// It can also be considered a reference implimentation of the trait.
+#[derive (Default)]
 pub struct WindowInterfaceNull {
 
     // Private

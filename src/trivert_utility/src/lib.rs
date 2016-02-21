@@ -30,4 +30,4 @@
 mod logger;
 
 // Public module exports
-pub use self::logger::Logger;
+pub use self::logger::{LogLevel, Logger};

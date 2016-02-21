@@ -14,17 +14,11 @@
 // limitations under the License.
 /*================================================================================================*/
 
-use super::WindowInterface;
-use super::_detail::WindowInterfaceNull;
-
 /*================================================================================================*/
 /*------STRUCTS-----------------------------------------------------------------------------------*/
 /*================================================================================================*/
 
 /// This is the main window struct
 ///
-/// It is the platform agnostic wrapper for the various window interfaces.
-pub struct Window {
-
-    interface : Box <WindowInterface>
-}
+/// It is the platform agnostic wrapper for the various window backends.
+pub struct Window;

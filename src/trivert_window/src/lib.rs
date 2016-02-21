@@ -27,9 +27,6 @@
 
 // Private modules
 mod window;
-mod window_interface;
-mod _detail;
 
 // Public module exports
 pub use self::window::Window;
-pub use self::window_interface::WindowInterface;

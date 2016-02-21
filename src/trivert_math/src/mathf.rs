@@ -21,6 +21,7 @@
 /// The Math utility struct
 ///
 /// It contains various utility functions such as: Clamp, Lerp, Min, Max, etc.
+#[derive (Copy, Clone)]
 pub struct Mathf;
 
 /*================================================================================================*/

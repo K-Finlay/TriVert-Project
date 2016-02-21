@@ -23,15 +23,16 @@ use std::fs::File;
 /// The logger struct.
 ///
 /// It allows for basic logging capabilities.
-/// It can currently log strings, but other will be added in the future.
+/// It can currently log strings, but others will be added in the future.
 pub struct Logger {
 
+    // Private
     log_file    : Option <File>,
     is_enabled  : bool
 }
 
 /*================================================================================================*/
-/*------FUNCTIONS---------------------------------------------------------------------------------*/
+/*------PUBLIC STATIC FUNCTIONS-------------------------------------------------------------------*/
 /*================================================================================================*/
 
 impl Logger {

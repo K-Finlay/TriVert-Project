@@ -23,6 +23,7 @@
 
 // Crate attributes
 #![allow (dead_code)]
+#![deny  (missing_copy_implementations)]
 #![deny  (missing_docs)]
 
 // Private modules

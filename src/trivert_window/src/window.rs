@@ -21,6 +21,7 @@
 /// This is the main window struct
 ///
 /// It is the platform agnostic wrapper for the various window backends.
+#[derive (Copy, Clone)]
 pub struct Window;
 
 /*================================================================================================*/

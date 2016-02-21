@@ -15,25 +15,18 @@
 /*================================================================================================*/
 
 /*================================================================================================*/
-//! This is the main crate of the TriVert project.
+//! This crate contains various utility functions for use within TriVert.
 //!
-//! TriVert is a game framework written in Rust.
-//! It aims to be simple to use, while remaining powerful and flexible.
-//!
-//! At this point in time, unstable rust is required to build TriVert.
-//! As Rusts standard library stabalizes, this may change in the future.
+//! Similar to the math module, it can be used independantly in non TriVert
+//! releated projects.
 /*================================================================================================*/
 
 // Crate attributes
-#![allow (dead_code)]
-#![deny  (missing_docs)]
+#![allow   (dead_code)]
+#![deny    (missing_docs)]
 
-// External crates
-extern crate trivert_math;
-extern crate trivert_utility;
-extern crate trivert_window;
+// Private modules
+mod logger;
 
 // Public module exports
-pub use trivert_math as math;
-pub use trivert_utility as utility;
-pub use trivert_window as window;
+pub use self::logger::Logger;

@@ -62,6 +62,10 @@ impl Logger {
     /// Creates a new logger instance
     ///
     /// Logging is disabled on faliure.
+    ///
+    /// # Examples
+    /// ```
+    /// let logger = Logger::new ("log.txt".to_string ());
     pub fn new (log_file_path : String) -> Logger {
 
         match File::create (&log_file_path) {
@@ -96,6 +100,15 @@ impl Logger {
 /*================================================================================================*/
 
     /// Logs a message
+    ///
+    /// # Examples
+    /// ```
+    /// let logger = Logger::new ("log.txt".to_string ());
+    ///
+    /// logger.log (LogLevel::Debug   ("This is a log entry".to_string ())) // Debug
+    /// logger.log (LogLevel::Message ("This is a log entry".to_string ())) // Message
+    /// logger.log (LogLevel::Warning ("This is a log entry".to_string ())) // Warning
+    /// logger.log (LogLevel::Error   ("This is a log entry".to_string ())) // Error
     // TODO : Add log level specific messages (ie: DEBUG: "Insert message here")
     pub fn log (&mut self, log_level : LogLevel) {
 

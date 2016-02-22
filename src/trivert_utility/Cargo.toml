@@ -5,6 +5,9 @@ authors     = ["Kyle Finlay <kyle.finlay01@gmail.com>"]
 description = "Utility functions for use within TriVert"
 license     = "Apache-2.0"
 
+[dependencies]
+time = "0.1.34"
+
 [lib]
 name = "trivert_utility"
 path = "src/lib.rs"

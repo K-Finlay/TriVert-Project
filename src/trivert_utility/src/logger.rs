@@ -68,7 +68,7 @@ impl Logger {
     ///
     /// # Examples
     /// ```
-    /// let logger = Logger::new ("log.txt".to_string ());
+    /// let logger = Logger::new ("log.txt");
     pub fn new (log_file_path : &str) -> Logger {
 
         match File::create (&log_file_path) {
@@ -106,12 +106,12 @@ impl Logger {
     ///
     /// # Examples
     /// ```
-    /// let mut logger = Logger::new ("log.txt".to_string ());
+    /// let mut logger = Logger::new ("log.txt");
     ///
-    /// logger.log (LogLevel::Debug   ("This is a log entry".to_string ())) // Debug
-    /// logger.log (LogLevel::Message ("This is a log entry".to_string ())) // Message
-    /// logger.log (LogLevel::Warning ("This is a log entry".to_string ())) // Warning
-    /// logger.log (LogLevel::Error   ("This is a log entry".to_string ())) // Error
+    /// logger.log (LogLevel::Debug   ("This is a log entry")) // Debug
+    /// logger.log (LogLevel::Message ("This is a log entry")) // Message
+    /// logger.log (LogLevel::Warning ("This is a log entry")) // Warning
+    /// logger.log (LogLevel::Error   ("This is a log entry")) // Error
     pub fn log (&mut self, log_level : LogLevel) {
 
         // Check if logger is enabled and logging

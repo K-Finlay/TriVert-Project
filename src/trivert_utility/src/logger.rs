@@ -122,9 +122,8 @@ impl Logger {
         // Check if logger is enabled and logging
         if self.is_enabled && self.is_logging {
 
-            // Get the buffer from the logger struct, and get current time
-            let buffer       = self.log_file.as_mut ().unwrap ();
-            let current_time = time::now ();
+            // Get the buffer from the logger struct
+            let buffer = self.log_file.as_mut ().unwrap ();
 
             match log_level {
 
@@ -134,7 +133,7 @@ impl Logger {
                     // Only call if run in debug
                     if cfg! (debug_assertions) {
 
-                        let log_string = format! ("DEBUG   ({}) {}\n", current_time.asctime (), m);
+                        let log_string = format! ("DEBUG   ({}) {}\n", time::now ().asctime (), m);
                         buffer.write (log_string.as_bytes ()).unwrap ();
                     }
                 },
@@ -142,21 +141,21 @@ impl Logger {
                 // Message
                 LogLevel::Info (m) => {
 
-                    let log_string = format! ("INFO    ({}) {}\n", current_time.asctime (), m);
+                    let log_string = format! ("INFO    ({}) {}\n", time::now ().asctime (), m);
                     buffer.write (log_string.as_bytes ()).unwrap ();
                 },
 
                 // Warning
                 LogLevel::Warning (m) => {
 
-                    let log_string = format! ("WARNING ({}) {}\n", current_time.asctime (), m);
+                    let log_string = format! ("WARNING ({}) {}\n", time::now ().asctime (), m);
                     buffer.write (log_string.as_bytes ()).unwrap ();
                 },
 
                 // Error
                 LogLevel::Error (m) => {
 
-                    let log_string = format! ("ERROR   ({}) {}\n", current_time.asctime (), m);
+                    let log_string = format! ("ERROR   ({}) {}\n", time::now ().asctime (), m);
                     buffer.write (log_string.as_bytes ()).unwrap ();
                 }
             }

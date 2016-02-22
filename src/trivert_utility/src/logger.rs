@@ -79,8 +79,9 @@ impl Logger {
 
             Err (_) => {
 
-                println! ("WARNING: Log file could not be created\n
-                           Logging has been disabled");
+                println! ("{}\n{}",
+                          "WARNING: Log file could not be created",
+                          "         Logging has been disabled\n");
 
                 Logger {log_file   : None,
                         is_enabled : false,
@@ -96,8 +97,12 @@ impl Logger {
     /// Starts file logging
     pub fn begin_log (&mut self) {
 
-        self.is_logging = true;
-        self.log_file.as_mut ().unwrap ().write ("---BEGIN LOG---\n\n".as_bytes ()).unwrap ();
+        // Check if enabled
+        if self.is_enabled {
+
+            self.is_logging = true;
+            self.log_file.as_mut ().unwrap ().write ("---BEGIN LOG---\n\n".as_bytes ()).unwrap ();
+        }
     }
 
 /*================================================================================================*/
@@ -163,7 +168,11 @@ impl Logger {
     /// Stops file logging
     pub fn end_log (&mut self) {
 
-        self.is_logging = false;
-        self.log_file.as_mut ().unwrap ().write ("\n---END LOG---\n".as_bytes ()).unwrap ();
+        // Check if enabled
+        if self.is_enabled {
+
+            self.is_logging = false;
+            self.log_file.as_mut ().unwrap ().write ("\n---END LOG---\n".as_bytes ()).unwrap ();
+        }
     }
 }

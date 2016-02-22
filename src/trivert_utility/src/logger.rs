@@ -14,6 +14,8 @@
 // limitations under the License.
 /*================================================================================================*/
 
+extern crate time;
+
 use std::fs::File;
 use std::io::BufWriter;
 use std::io::prelude::Write;
@@ -25,16 +27,17 @@ use std::io::prelude::Write;
 /// The log level enum
 ///
 /// It is used with the logger struct, and is used to determine the severity of the message.
+#[derive (Copy, Clone)]
 pub enum LogLevel {
 
     /// Used for logging debug messages (stripped out of release builds)
-    Debug   (String),
+    Debug (&'static str),
     /// Used for normal logging messages
-    Message (String),
+    Info (&'static str),
     /// Used for warnings (non critical errors)
-    Warning (String),
+    Warning (&'static str),
     /// Used for critical errors
-    Error   (String)
+    Error (&'static str)
 }
 
 /*================================================================================================*/
@@ -66,7 +69,7 @@ impl Logger {
     /// # Examples
     /// ```
     /// let logger = Logger::new ("log.txt".to_string ());
-    pub fn new (log_file_path : String) -> Logger {
+    pub fn new (log_file_path : &str) -> Logger {
 
         match File::create (&log_file_path) {
 
@@ -91,10 +94,10 @@ impl Logger {
 /*================================================================================================*/
 
     /// Starts file logging
-    // TODO: Write begin log string
     pub fn begin_log (&mut self) {
 
         self.is_logging = true;
+        self.log_file.as_mut ().unwrap ().write ("---BEGIN LOG---\n\n".as_bytes ()).unwrap ();
     }
 
 /*================================================================================================*/
@@ -103,20 +106,20 @@ impl Logger {
     ///
     /// # Examples
     /// ```
-    /// let logger = Logger::new ("log.txt".to_string ());
+    /// let mut logger = Logger::new ("log.txt".to_string ());
     ///
     /// logger.log (LogLevel::Debug   ("This is a log entry".to_string ())) // Debug
     /// logger.log (LogLevel::Message ("This is a log entry".to_string ())) // Message
     /// logger.log (LogLevel::Warning ("This is a log entry".to_string ())) // Warning
     /// logger.log (LogLevel::Error   ("This is a log entry".to_string ())) // Error
-    // TODO : Add log level specific messages (ie: DEBUG: "Insert message here")
     pub fn log (&mut self, log_level : LogLevel) {
 
         // Check if logger is enabled and logging
         if self.is_enabled && self.is_logging {
 
-            // Get the buffer from the logger struct
-            let buffer = self.log_file.as_mut ().unwrap ();
+            // Get the buffer from the logger struct, and get current time
+            let buffer       = self.log_file.as_mut ().unwrap ();
+            let current_time = time::now ();
 
             match log_level {
 
@@ -126,26 +129,30 @@ impl Logger {
                     // Only call if run in debug
                     if cfg! (debug_assertions) {
 
-                        buffer.write (m.as_bytes ()).unwrap ();
+                        let log_string = format! ("DEBUG   ({}) {}\n", current_time.asctime (), m);
+                        buffer.write (log_string.as_bytes ()).unwrap ();
                     }
                 },
 
                 // Message
-                LogLevel::Message (m) => {
+                LogLevel::Info (m) => {
 
-                    buffer.write (m.as_bytes ()).unwrap ();
+                    let log_string = format! ("INFO    ({}) {}\n", current_time.asctime (), m);
+                    buffer.write (log_string.as_bytes ()).unwrap ();
                 },
 
                 // Warning
                 LogLevel::Warning (m) => {
 
-                    buffer.write (m.as_bytes ()).unwrap ();
+                    let log_string = format! ("WARNING ({}) {}\n", current_time.asctime (), m);
+                    buffer.write (log_string.as_bytes ()).unwrap ();
                 },
 
                 // Error
                 LogLevel::Error (m) => {
 
-                    buffer.write (m.as_bytes ()).unwrap ();
+                    let log_string = format! ("ERROR   ({}) {}\n", current_time.asctime (), m);
+                    buffer.write (log_string.as_bytes ()).unwrap ();
                 }
             }
         }
@@ -154,9 +161,9 @@ impl Logger {
 /*================================================================================================*/
 
     /// Stops file logging
-    // TODO: Write end log string
     pub fn end_log (&mut self) {
 
         self.is_logging = false;
+        self.log_file.as_mut ().unwrap ().write ("\n---END LOG---\n".as_bytes ()).unwrap ();
     }
 }
